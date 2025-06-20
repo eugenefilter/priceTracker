@@ -34,7 +34,7 @@ const props = defineProps<{
   };
 }>();
 
-const productsList = ref<Product[]>([...props.products.data]);
+const productsList = ref<Product[]>(Array.isArray(props.products?.data) ? [...props.products.data] : []);
 const user = inject<User>('user');
 
 if (!user) {
