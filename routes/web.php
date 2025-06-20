@@ -1,15 +1,26 @@
 <?php
 
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\ProductsChangeController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\TestClientsConnectionController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('home');
+Route::middleware(['auth', 'verified'])->group(function () {
+  Route::get('/', function () {
+    return redirect()->route('links');
+  })->name('home');
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+  Route::get('links', [LinkController::class, 'index'])->name('links');
+  Route::get('links/create', fn() => inertia()->render('Links/Create'))->name('links.create');
+  Route::post('links', [LinkController::class, 'store'])->name('links.store');
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+  Route::get('products', [ProductsController::class, 'index'])->name('products');
+  Route::get('products/change', [ProductsChangeController::class, 'index'])->name('products.change');
+
+
+  Route::get('product/check/{product}', [ProductsController::class, 'check'])->name('product.check');
+});
+
+
+require __DIR__ . '/auth.php';
