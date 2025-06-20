@@ -19,7 +19,7 @@ createInertiaApp({
       .use(ZiggyVue);
 
     // app.config.globalProperties.$user = props.initialPage.props.auth?.user;
-    const user = props.initialPage.props.auth.user as User;
+    const user = (props.initialPage?.props?.auth?.user as User) ?? null;
     app.provide('user', user);
 
     app.mount(el);
