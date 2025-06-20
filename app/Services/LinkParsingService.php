@@ -4,18 +4,17 @@ namespace App\Services;
 
 use App\Actions\UseCaseAction;
 use App\Models\Link;
-use FakeShop\Models\FakeProduct;
-use Illuminate\Support\Str;
 
 final class LinkParsingService
 {
 
-  public function __construct()
+  public function __construct(private readonly UseCaseAction $action)
   {
   }
 
-  public function handle(UseCaseAction $action): void
+  public function handle(): void
   {
+    $action = $this->action;
     Link::query()
       ->orderBy('user_id')
       ->each(function (Link $link) use ($action) {
