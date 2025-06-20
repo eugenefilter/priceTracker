@@ -12,6 +12,7 @@ npm install
 
 # Скопировать и настроить .env
 cp .env.example .env
+
 # Заполнить переменные ниже
 ```
 
@@ -49,9 +50,19 @@ QUEUE_CONNECTION=sync
 # Запустить миграции
 php artisan migrate
 
+# Would you like to create it?
+Выбрать Yes
+
 # Заполнить тестовыми товарами
 php artisan db:seed --class="FakeShop\\Database\\Seeders\\FakeProductSeeder"
 ```
+
+# Выполимте команды
+
+php artisan key:generate
+
+php artisan config:clear
+php artisan config:cache
 
 ## Сборка фронтенда
 
