@@ -67,9 +67,6 @@ php artisan config:cache
 ## Сборка фронтенда
 
 ```bash
-# Режим разработки
-npm run dev
-
 # Сборка для продакшена
 npm run build
 ```

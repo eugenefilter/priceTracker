@@ -72,21 +72,23 @@ onBeforeUnmount(() => {
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div v-for="product in productsList" :key="product.id" class="rounded-lg border p-4 shadow-md">
-          <h3 class="text-lg font-semibold">{{ product.title }}</h3>
-          <p>ID: {{ product.id }}</p>
-          <p>Title: {{ product.title }}</p>
-          <p>
-            Статус:
-            <span class="mt-2">
-              <button v-if="product.availability" class="mr-2 rounded bg-green-500 px-2 py-1 text-xs text-white">Доступен</button>
-              <button v-if="!product.availability" class="mr-2 rounded bg-red-500 px-2 py-1 text-xs text-white">Нет в наличии</button>
-            </span>
-          </p>
-          <p>Цена: {{ product.price }}</p>
+          <template v-if="product.id !== undefined">
+            <h3 class="text-lg font-semibold">{{ product.title }}</h3>
+            <p>ID: {{ product.id }}</p>
+            <p>Title: {{ product.title }}</p>
+            <p>
+              Статус:
+              <span class="mt-2">
+                <button v-if="product.availability" class="mr-2 rounded bg-green-500 px-2 py-1 text-xs text-white">Доступен</button>
+                <button v-if="!product.availability" class="mr-2 rounded bg-red-500 px-2 py-1 text-xs text-white">Нет в наличии</button>
+              </span>
+            </p>
+            <p>Цена: {{ product.price }}</p>
 
-          <div class="mt-10">
-            <Link :href="`/product/check/${product.id}`" class="rounded bg-amber-800 px-2 py-1 text-amber-50"> Проверить </Link>
-          </div>
+            <div class="mt-10">
+              <Link :href="`/product/check/${product.id}`" class="rounded bg-amber-800 px-2 py-1 text-amber-50"> Проверить </Link>
+            </div>
+          </template>
         </div>
       </div>
 
